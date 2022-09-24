@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create new audio play</title>
+    <title>{{ __('forms.create_audio_play_title') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
     <style>
@@ -28,7 +28,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
-                                <label for="titleInput" class="form-label">Title</label>
+                                <label for="titleInput" class="form-label">{{ __('forms.title') }}</label>
                                 <input type="text" class="form-control" id="titleInput" name="title">
                             </div>
                         </div>
@@ -41,13 +41,13 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
-                                <label for="voiceActorsInput" class="form-label">Voice Actors</label>
+                                <label for="voiceActorsInput" class="form-label">{{ __('forms.voice_actors') }}</label>
                                 <input type="text" class="form-control" id="voiceActorsInput" name="voice_actors">
                             </div>
                         </div>
                     </div>
                     <div class="d-flex flex-row-reverse">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">{{ __('forms.save') }}</button>
                     </div>
                 </form>
             </div>
