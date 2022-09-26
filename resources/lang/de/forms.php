@@ -14,13 +14,18 @@ return [
     */
 
     //Titles of pages
-    'create_audio_play_title' => 'Create new audio play',
-    'edit_audio_play_title' => 'Edit audio play',
+    'create_audio_play_title' => 'Neuer Eintrag',
+    'edit_audio_play_title' => 'Eintrag bearbeiten',
+    'search_title' => 'Suche',
 
     //Inputs
-    'title' => 'Title',   //Audio play title input label
-    'voice_actors' => 'Voice Actors',   //Audio play voice actors input label
-    'save' => 'Save',   //Text of button that creates new audio play
-    'update' => 'Update',   //Text of button that updates audio play information
+    'title' => 'Titel',   //Audio play title input label
+    'voice_actors' => 'Sprecher',   //Audio play voice actors input label
+    'search_terms' => 'Suchbegriffe',   //Search term input label
+    'save' => 'Speichern',   //Text of button that creates new audio play
+    'update' => 'Eintrag ändern',   //Text of button that updates audio play information
+    'search' => 'Suche',   //Text of button that searches for audio plays
 
+    //Messages
+    'search_results_empty' => 'Keine Übereinstimmung'
 ];

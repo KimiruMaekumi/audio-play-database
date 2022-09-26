@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'voice_actor' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
+    'previous' => '&laquo; Vorige Seite',
+    'next' => 'Nächste Seite &raquo;',
 
 ];
