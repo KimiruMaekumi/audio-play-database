@@ -19,7 +19,7 @@ class AudioPlayController extends Controller
             $audio_plays = AudioPlay::all();
         else{
             $audio_play_service = new AudioPlayService();
-            $audio_plays = $audio_play_service->search($request['search_terms']);
+            $audio_plays = $audio_play_service->search_by_voice_actor($request['search_terms']);
         }
 
         return view('search_audio_play',[

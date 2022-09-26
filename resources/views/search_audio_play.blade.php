@@ -10,6 +10,13 @@
         html, body {
             height: 100%;
         }
+        .audio-play-title{
+            font-weight: bold;
+            font-size: 110%;
+        }
+        th {
+            font-size: 120%;
+        }
     </style>
 </head>
 <body @isset($search_terms) onload="highlightSearchTerms()" @endisset>
@@ -34,11 +41,11 @@
             <div class="col"></div>
         </div>
         @isset ($audio_plays)
-                <div class="row">
+                <div class="row flex">
                     <div class="col"></div>
-                    <div class="col-10">
+                    <div class="col">
                         @if (count($audio_plays) > 0)
-                            <table class="table table-striped">
+                            <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col">{{__('forms.title')}}</th>
@@ -48,7 +55,7 @@
                                 <tbody>
                                 @foreach ($audio_plays as $audio_play)
                                     <tr>
-                                        <td>{{$audio_play['title']}}</td>
+                                        <td class="audio-play-title">{{$audio_play['title']}}</td>
                                         <td class="voice-actor-cell">
                                             @foreach($audio_play['voice_actors'] as $voice_actor)
                                                 {{$voice_actor['name']}}<br>
