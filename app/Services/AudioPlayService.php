@@ -53,4 +53,32 @@ class AudioPlayService
             $audio_play->voice_actors()->attach($saved_voice_actor->id);
         }
     }
+
+    public function search($search_terms){
+        $search_terms_array = collect(explode(',',$search_terms));
+        $search_terms_array = $search_terms_array->map(function ($item){
+            return trim($item);
+        });
+
+        $audio_play_ids = collect([]);
+        //Get voice actors for each search term
+        foreach ($search_terms_array as $search_term){
+            $voice_actors = VoiceActor::with('audio_plays')
+                ->where('name','LIKE','%'.$search_term.'%')
+                ->get();
+            //Get audio plays for voice actor
+            foreach ($voice_actors as $voice_actor){
+                $audio_play_ids = $audio_play_ids
+                    ->concat(
+                        $voice_actor
+                            ->audio_plays
+                            ->pluck('id')
+                    );
+            }
+        }
+        $audio_play_ids = $audio_play_ids->unique();
+
+        return AudioPlay::with('voice_actors')
+            ->find($audio_play_ids);
+    }
 }

@@ -15,8 +15,17 @@ class AudioPlayController extends Controller
      */
     public function search(Request $request)
     {
-        $plays_with_actors = AudioPlay::with('voice_actors')->get();
-        return view('search_audio_play',['audio_plays'=>$plays_with_actors]);
+        if(!$request->has('search_terms'))
+            $audio_plays = AudioPlay::all();
+        else{
+            $audio_play_service = new AudioPlayService();
+            $audio_plays = $audio_play_service->search($request['search_terms']);
+        }
+
+        return view('search_audio_play',[
+            'search_terms'=>$request['search_terms'],
+            'audio_plays'=>$audio_plays->sortBy('title')
+        ]);
     }
 
     /**

@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 //Audio Play Routes
 
+Route::get('audio_plays/search', [AudioPlayController::class, 'search']);
+
 Route::get('audio_plays/create', [AudioPlayController::class, 'create']);
 Route::post('audio_plays', [AudioPlayController::class, 'store']);
 Route::get('audio_plays/{audio_play}/edit', [AudioPlayController::class, 'edit']);
