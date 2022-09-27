@@ -92,6 +92,8 @@ class AudioPlayService
         $search_terms_array = $search_terms_array->map(function ($item){
             return trim($item);
         });
+        //Convert localized characters to international versions and vice versa
+        $search_terms_array = $this->international_transcriptions($search_terms_array);
 
         $audio_play_ids = collect([]);
         //Get voice actors for each search term
@@ -111,7 +113,57 @@ class AudioPlayService
         }
         $audio_play_ids = $audio_play_ids->unique();    //Remove duplicates
 
-        return AudioPlay::with('voice_actors')
-            ->find($audio_play_ids);
+        return [
+            'audio_plays'=>AudioPlay::with('voice_actors')
+                ->find($audio_play_ids),
+            'search_terms'=>$search_terms_array
+        ];
+    }
+
+
+    /**
+     * Populate search terms with localized versions of international characters,
+     * as well as convert localized characters to international characters.
+     * Expands the search terms to include localized and international words.
+     *
+     * @param $search_terms
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    private function international_transcriptions($search_terms){
+
+        $transcriptions = [
+            'Ä' => 'Ae',
+            'ä' => 'ae',
+            'Ö' => 'Oe',
+            'ö' => 'oe',
+            'Ü' => 'Ue',
+            'ü' => 'ue',
+            'ß' => 'ss',
+        ];
+
+        $added_search_terms = [];
+        $replacement_count = 1;
+
+        foreach ($search_terms as $search_term){
+            foreach ($transcriptions as $localized => $international){
+                //Add localized to international conversions
+                $localized_search_term = $search_term;
+                while(str_contains($localized_search_term,$localized)){
+                    $localized_search_term = str_replace($localized, $international,$localized_search_term,$replacement_count);
+                    $added_search_terms[] = $localized_search_term;
+                }
+                //Add international to localized conversions
+                $international_search_term = $search_term;
+                while(str_contains($international_search_term,$international)){
+                    $international_search_term = str_replace($international, $localized, $international_search_term, $replacement_count);
+                    $added_search_terms[] = $international_search_term;
+                }
+            }
+        }
+
+        $search_terms = array_merge($search_terms->toArray(), $added_search_terms);
+
+        //Combine input search terms and transcribed added search terms
+        return $search_terms;
     }
 }

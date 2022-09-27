@@ -15,15 +15,19 @@ class AudioPlayController extends Controller
      */
     public function search(Request $request)
     {
-        if(!$request->has('search_terms'))
+        if(!$request->has('search_terms')){
             $audio_plays = AudioPlay::all();
+            $search_terms = $request['search_terms'];
+        }
         else{
             $audio_play_service = new AudioPlayService();
-            $audio_plays = $audio_play_service->search_by_voice_actor($request['search_terms']);
+            $audio_plays_with_search_terms = $audio_play_service->search_by_voice_actor($request['search_terms']);
+            $audio_plays = $audio_plays_with_search_terms['audio_plays'];
+            $search_terms = $audio_plays_with_search_terms['search_terms'];
         }
 
         return view('search_audio_play',[
-            'search_terms'=>$request['search_terms'],
+            'search_terms'=>join(',',$search_terms),
             'audio_plays'=>$audio_plays->sortBy('title')
         ]);
     }
