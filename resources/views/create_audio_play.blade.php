@@ -3,6 +3,11 @@
 @section('title'){{ __('forms.create_audio_play_title') }}@stop
 
 @section('content')
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ __('forms.audio_play_stored',['title'=>session('message')]) }}
+        </div>
+    @endif
     <form method="POST" action="/audio_plays">
         @csrf
         <div class="row">

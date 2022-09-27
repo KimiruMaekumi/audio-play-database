@@ -27,5 +27,6 @@ return [
     'search' => 'Suche',   //Text of button that searches for audio plays
 
     //Messages
-    'search_results_empty' => 'Keine Übereinstimmung'
+    'search_results_empty' => 'Keine Übereinstimmung',
+    'audio_play_stored' => ':title is stored in the database!',  //Success message after creating audio play
 ];

@@ -53,9 +53,9 @@ class AudioPlayController extends Controller
         ]);
 
         $audio_play_service = new AudioPlayService();
-        $audio_play_service->store($validated);
+        $new_audio_play = $audio_play_service->store($validated);
 
-        return redirect('audio_plays/create');
+        return redirect('audio_plays/create')->with('message', $new_audio_play->title);
     }
 
     /**

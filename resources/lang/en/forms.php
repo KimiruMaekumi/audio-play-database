@@ -26,6 +26,7 @@ return [
     'search' => 'Search',   //Text of button that searches for audio plays
 
     //Messages
-    'search_results_empty' => 'There are no audio plays found using these search terms'
+    'search_results_empty' => 'There are no audio plays found using these search terms',
+    'audio_play_stored' => ':title is stored in the database!',  //Success message after creating audio play
 
 ];
